@@ -23,7 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install feedparser
+          pip install requests feedparser
 
       - name: Run script
         run: python update_velog.py
@@ -32,6 +32,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add posts/*.md
+          git add posts/
           # 변경사항이 있을 때만 커밋
           git diff --quiet && git diff --staged --quiet || (git commit -m "Update Velog posts" && git push)
