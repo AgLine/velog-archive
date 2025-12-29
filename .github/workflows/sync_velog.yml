@@ -30,8 +30,15 @@ jobs:
 
       - name: Commit and Push
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add posts/
-          # 변경사항이 있을 때만 커밋
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update Velog posts" && git push)
+          # 1. 사용자 정보 설정 (이 부분이 본인 계정이어야 잔디가 심어집니다)
+          git config --local user.email "rladmstjs120@gmail.com"
+          git config --local user.name "agline"
+          
+          # 2. 변경된 파일 추가
+          git add .
+          
+          # 3. 변경사항이 있을 때만 커밋
+          if ! git diff --staged --quiet; then
+            git commit -m "Update Velog posts"
+            git push
+          fi
